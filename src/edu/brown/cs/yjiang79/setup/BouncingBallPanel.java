@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 import javax.swing.JPanel;
@@ -15,7 +16,7 @@ import edu.brown.cs.yjiang79.setup.BouncingBallMain;
 public class BouncingBallPanel extends JPanel {
 	
 	final static int INTERVAL = 100; 
-	final static int BALL_NUM = 5; 
+	private int ballNum = 5; 
 	
 	private final ArrayList<Ball> ballList;
 	private final Timer timer;           
@@ -23,16 +24,22 @@ public class BouncingBallPanel extends JPanel {
 
 	public BouncingBallPanel() {
 		this.ballList = new ArrayList<>();
-		for(int i = 0; i < 5; i++) {
+		ArrayList<Integer> list = new ArrayList<Integer>();
+        for (int i=1; i<21; i++) {
+            list.add(i);
+        }
+        Collections.shuffle(list);
+		for(int i = 0; i < ballNum; i++) {
 			final int x = BouncingBallMain.DEFAULT_WIDTH / 2;
 			final int y = BouncingBallMain.DEFAULT_HEIGHT / 2;
 			
-			final Random random = new Random();
-			
+			final Random random = new Random();		
 			final int directionX = (int) (random.nextInt(100)) > 50 ? 1 : -1;
 			final int directionY = (int) (random.nextInt(100)) > 50 ? 1 : -1;
-			final int velocityX = (int) (random.nextInt(20)) * directionX;
-			final int velocityY = (20 - velocityX) * directionY;
+			
+			final int velocityX = list.indexOf(i) * directionX;
+			final int velocityY = (21 - velocityX) * directionY;
+			
 			
 			this.ballList.add(new Ball(x, y, velocityX, velocityY));
 		}
