@@ -58,18 +58,14 @@ public class ControlPanel extends JPanel{
     	final JPanel line1 = new JPanel();
     	line1.add(resumeButton);
     	line1.add(pauseButton);
-//    	final JPanel line2 = new JPanel();
     	line1.add(ballNumLabel);
     	line1.add(ballNumTextField);
-//    	final JPanel line3 = new JPanel();
     	line1.add(velocityLabel);
     	line1.add(velocityTextField);
     	line1.add(velocityLabel1);
     	
 	    setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 	    add(line1);
-//	    add(line2);
-//	    add(line3);
 	    
 	    setOpaque(true);
     }
