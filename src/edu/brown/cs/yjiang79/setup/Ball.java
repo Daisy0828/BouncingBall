@@ -1,17 +1,19 @@
 package edu.brown.cs.yjiang79.setup;
 
-import java.awt.*;
+import java.awt.Color;
+import java.util.Random;
 
 public class Ball {
 	
 	final static int DEFAULT_DIAMETER = 20;
-	final static Color[] COLORLIST = {Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE, Color.PINK, Color.GRAY};
  
 	private int x;           
 	private int y;
 	private int diameter;
-	private int color;
+	private Color color;
 	 
+	private int velocityXOriginal;   
+	private int velocityYOriginal;
 	private int velocityX;   
 	private int velocityY;
 	 
@@ -19,59 +21,66 @@ public class Ball {
 	private int limitY;
  
 	public Ball(int x, int y, int velocityX, int velocityY) {
+		final Random r=new Random();
 	    this.x = x;
 	    this.y = y;
-	    this.diameter = DEFAULT_DIAMETER;
-	    this.color = 0;
+	    diameter = DEFAULT_DIAMETER;
+	    color = new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256),127);
+	    velocityXOriginal = velocityX;
+	    velocityYOriginal = velocityY;
 	    this.velocityX = velocityX;
 	    this.velocityY = velocityY;
 	}
  
-
+	public void changeVelocity(float velocity) {
+		velocityX = (int) (velocityXOriginal * velocity);
+		velocityY = (int) (velocityYOriginal * velocity);
+	}
  
 	public void move(int panelWidth, int panelHeight) {
-	    this.x += velocityX;
-	    this.y += velocityY;  
+		final Random r=new Random();
+	    x += velocityX;
+	    y += velocityY;  
 	    
-	    this.limitX  = panelWidth  - this.diameter;
-	    this.limitY = panelHeight - this.diameter;
+	    limitX  = panelWidth  - diameter;
+	    limitY = panelHeight - diameter;
 	     
-	    if(this.x < 0) {                  
-	        this.x = 0;            
-	        this.velocityX = -this.velocityX; 
-	        this.color = (this.color + 1) % 7;
-	    } else if(this.x > this.limitX) { 
-	        this.x = this.limitX;    
-	        this.velocityX = -this.velocityX;  
-	        this.color = (this.color + 1) % 7;
+	    if(x < 0) {                  
+	        x = 0;            
+	        velocityX = -velocityX; 
+	        color = new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256),127);
+	    } else if(x > limitX) { 
+	        x = limitX;    
+	        velocityX = -velocityX;  
+	        color = new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256),127);
 	    }
 	     
-	    if(this.y < 0) {                 
-	        this.y = 0;
-	        this.velocityY = -this.velocityY;
-	        this.color = (this.color + 1) % 7;
+	    if(y < 0) {                 
+	        y = 0;
+	        velocityY = -velocityY;
+	        color = new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256),127);
 	        
-	    } else if(this.y > this.limitY) { 
-	        this.y =  this.limitY;
-	        this.velocityY = -this.velocityY;
-	        this.color = (this.color + 1) % 7;
+	    } else if(y > limitY) { 
+	        y =  limitY;
+	        velocityY = -velocityY;
+	        color = new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256),127);
 	    }
 	}
  
 	public int getX() {
-		return this.x;
+		return x;
 	}
 	
 	public int getY() {
-		return this.y;
+		return y;
 	}
 	
 	public int getDiameter() {
-		return this.diameter;
+		return diameter;
 	}
 	 
 	public Color getColor() {
-		return this.COLORLIST[this.color];
+		return color;
 	}
 
 }

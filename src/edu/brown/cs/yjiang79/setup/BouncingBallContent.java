@@ -1,8 +1,10 @@
 package edu.brown.cs.yjiang79.setup;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 
 class BouncingBallContent extends JPanel {
 	
@@ -10,15 +12,15 @@ class BouncingBallContent extends JPanel {
 	private final ControlPanel controlPanel;
 	
  
-	public BouncingBallContent() {
-		this.bouncingBallPanel = new BouncingBallPanel();
-		this.controlPanel = new ControlPanel();
+	public BouncingBallContent(JFrame demo) {
+		bouncingBallPanel = new BouncingBallPanel();
+		controlPanel = new ControlPanel(demo);
 		
-		this.controlPanel.setBouncingBallPanel(this.bouncingBallPanel);
+		controlPanel.setBouncingBallPanel(bouncingBallPanel);
 	     
-	    this.setLayout(new BorderLayout());
-	    this.add(controlPanel, BorderLayout.EAST);
-	    this.add(bouncingBallPanel, BorderLayout.CENTER);
+	    setLayout(new BorderLayout());
+	    add(controlPanel, BorderLayout.PAGE_START);
+	    add(bouncingBallPanel, BorderLayout.CENTER);
 	}
  
  
